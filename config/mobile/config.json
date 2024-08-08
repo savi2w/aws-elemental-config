@@ -1,0 +1,90 @@
+{
+  "Queue": "<YOUR_QUEUE_ARN>",
+  "UserMetadata": {},
+  "Role": "<YOUR_ROLE_ARN>",
+  "Settings": {
+    "OutputGroups": [
+      {
+        "Name": "File Group",
+        "Outputs": [
+          {
+            "VideoDescription": {
+              "CodecSettings": {
+                "Codec": "H_264",
+                "H264Settings": {
+                  "RateControlMode": "QVBR",
+                  "QvbrSettings": {
+                    "QvbrQualityLevel": 6,
+                    "QvbrQualityLevelFineTune": 0.4
+                  },
+                  "GopSize": 0.5,
+                  "GopSizeUnits": "SECONDS",
+                  "MaxBitrate": 3500000,
+                  "SceneChangeDetect": "ENABLED"
+                }
+              },
+              "ScalingBehavior": "DEFAULT",
+              "TimecodeInsertion": "DISABLED",
+              "AntiAlias": "ENABLED",
+              "Sharpness": 50,
+              "AfdSignaling": "NONE",
+              "DropFrameTimecode": "ENABLED",
+              "RespondToAfd": "NONE",
+              "ColorMetadata": "INSERT"
+            },
+            "AudioDescriptions": [
+              {
+                "CodecSettings": {
+                  "Codec": "AAC",
+                  "AacSettings": {
+                    "Bitrate": 64000,
+                    "CodingMode": "CODING_MODE_2_0",
+                    "SampleRate": 48000,
+                    "Specification": "MPEG4"
+                  }
+                },
+                "LanguageCodeControl": "FOLLOW_INPUT"
+              }
+            ],
+            "ContainerSettings": {
+              "Container": "MP4",
+              "Mp4Settings": {
+                "CslgAtom": "INCLUDE",
+                "FreeSpaceBox": "EXCLUDE",
+                "MoovPlacement": "PROGRESSIVE_DOWNLOAD"
+              }
+            }
+          }
+        ],
+        "OutputGroupSettings": {
+          "Type": "FILE_GROUP_SETTINGS",
+          "FileGroupSettings": {
+            "Destination": "<OUTPUT_S3_URL>"
+          }
+        }
+      }
+    ],
+    "AdAvailOffset": 0,
+    "Inputs": [
+      {
+        "AudioSelectors": {
+          "Audio Selector 1": {
+            "Offset": 0,
+            "DefaultSelection": "DEFAULT",
+            "SelectorType": "LANGUAGE_CODE",
+            "ProgramSelection": 1,
+            "LanguageCode": "ENM"
+          }
+        },
+        "FileInput": "<INPUT_S3_URL>",
+        "VideoSelector": {
+          "ColorSpace": "FOLLOW",
+          "Rotate": "AUTO"
+        },
+        "OutputSettings": {
+          "ScalingMode": "DEFAULT"
+        }
+      }
+    ]
+  }
+}
